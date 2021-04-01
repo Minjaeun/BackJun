@@ -1,0 +1,42 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
+public class Main {
+	public static void main(String[] args) throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		
+		int n = Integer.parseInt(bf.readLine());
+		
+		char[] testcase = null;
+		int[] score ;
+		int sum = 0;
+		
+		for(int i = 0; i<n ; i++) {
+			testcase = bf.readLine().toCharArray();
+			score = new int[testcase.length];
+			
+			for(int j = 0; j < testcase.length ; j++) {
+				if(testcase[j] == 'O') {
+					if( j ==0 ) {
+						score[0] = 1;
+					}
+					else {
+						score[j] = score[j-1]+1;
+					}
+					
+				}
+				else {
+					score[j] = 0;
+				}
+				sum = sum + score[j];
+			}
+			System.out.println(sum);
+			sum = 0;
+			score = null;
+			testcase = null;
+		}
+		
+	}
+}

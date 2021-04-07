@@ -1,0 +1,51 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class Main {
+	public static void main(String[] args)throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		String S = br.readLine();
+		char c;
+		
+		int[] alpha = new int[26];	//97 ~ 122
+		int ASC = 97;
+		
+		Boolean b ;
+		int j;
+		
+		for(int i = 0 ; i<alpha.length ; i++) {
+			alpha[i] = -1;
+			b = true;
+			j = 0;
+			
+			while(b) {
+				c = S.charAt(j);
+				
+				if((int)c == ASC) {
+					b = false;
+					alpha[i] =j;
+				}
+				else {
+					if(j<S.length()-1) {
+						j++;
+					}
+					else {
+						b = false;
+					}
+				}
+			}
+			
+			bw.write(alpha[i]+" ");
+			ASC++;
+		}
+
+		
+		bw.flush();
+		bw.close();
+	}
+	
+}

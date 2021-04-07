@@ -1,0 +1,47 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class Main {
+	public static void main(String[] args) throws IOException{
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter (new OutputStreamWriter(System.out));
+		int N = Integer.parseInt(bf.readLine());
+		StringTokenizer st ;
+		int[][] scores = new int[N][];
+		double[] avg = new double[N];
+		
+		for(int i = 0; i < N ; i++) {
+			st = new StringTokenizer(bf.readLine());
+			int n = Integer.parseInt(st.nextToken());
+			scores[i] = new int[n];
+			avg[i] = 0;
+			for(int j= 0; j<n ; j++) {
+				scores[i][j] = Integer.parseInt(st.nextToken());
+				avg[i] = avg[i] +scores[i][j];
+			}
+			avg[i] = avg[i]/n;
+			
+		}
+		int OverAvg = 0;
+		double percentage = 0.0;
+		for(int i = 0; i< N ; i++) {
+			for(int j = 0; j<scores[i].length ; j++) {
+				if(scores[i][j]>avg[i]) {
+					OverAvg++;
+				}
+			}
+			percentage = OverAvg*100.0;
+			percentage = percentage/scores[i].length;
+	
+			bw.write(String.format("%.3f", percentage)+"%\n");  //반올림 해주는 함수 String.format. 아래값이 0이여도 버리지 않고 그대로 출력.
+			OverAvg = 0;
+		}
+		bw.flush();
+		bw.close();
+
+	}
+}
